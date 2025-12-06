@@ -7,7 +7,7 @@
 #include <Wire.h>
 
 #define HARDWARE MD_MAX72XX::GENERIC_HW
-#define MAX_DEVICES 4
+#define MAX_DEVICES 5
 #define CS_PIN 5
 
 MD_Parola displayarray1 = MD_Parola(HARDWARE, CS_PIN, MAX_DEVICES);
@@ -30,7 +30,7 @@ void setup(){
   displayarray1.begin();
   displayarray1.setIntensity(5);
   displayarray1.displayClear();
-  displayarray1.displayText("Waiting signal", PA_CENTER, 100, 0, PA_SCROLL_LEFT);
+  displayarray1.displayText("Waiting signal", PA_CENTER, 100, 0, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
 
   WiFi.mode(WIFI_STA);
   if(esp_now_init() != ESP_OK){
@@ -45,7 +45,7 @@ void loop(){
   if(displayarray1.displayAnimate()){
     if(newdata){
       displayarray1.displayClear();
-      displayarray1.displayText(incomingdata.text, PA_CENTER, 80, 0, PA_SCROLL_LEFT);
+      displayarray1.displayText(incomingdata.text, PA_CENTER, 80, 0, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
       newdata = false;
     }
     displayarray1.displayReset();
